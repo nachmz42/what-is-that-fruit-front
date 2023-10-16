@@ -8,7 +8,7 @@ const { Title, Paragraph } = Typography;
 const UploadImage = () => {
   const props = {
     name: "file",
-    action: "URL_de_tu_servidor_donde_manipular_las_imagenes",
+    action: "http://127.0.0.1:8000/predict/fruit",
     headers: {
       authorization: "authorization-text",
     },
