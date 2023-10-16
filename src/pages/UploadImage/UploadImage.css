@@ -1,0 +1,19 @@
+.upload-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.list-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-bottom: 3%;
+}
+
+.inner-container {
+  text-align: center;
+  width: 30%;
+}
