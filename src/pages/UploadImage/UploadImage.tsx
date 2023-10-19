@@ -1,27 +1,58 @@
-import { Upload, Button, message } from "antd";
+import { Upload, Button, message, Modal } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "./UploadImage.css";
 import { Divider, List, Typography } from "antd";
+import { predictPredictGet } from "@api/services";
+import { useEffect, useState } from "react";
+import { FruitPredictionDto } from "@api/models/FruitPrediction";
 
 const { Title, Paragraph } = Typography;
 
 const UploadImage = () => {
+  const [uploaded, setUploaded] = useState<boolean>(false);
+  const [prediction, setPrediction] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const props = {
     name: "file",
-    action: "http://127.0.0.1:8000/predict/fruit",
+    action: "http://127.0.0.1:8000/upload",
     headers: {
       authorization: "authorization-text",
     },
+    beforeUpload: (file: File) => {
+      return checkFileType(file);
+    },
     onChange(info: any) {
       if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
+        setUploaded(false);
       }
       if (info.file.status === "done") {
+        setUploaded(true);
         message.success(`${info.file.name} file uploaded successfully`);
       } else if (info.file.status === "error") {
+        setUploaded(false);
         message.error(`${info.file.name} file upload failed.`);
       }
     },
+  };
+
+  const checkFileType = (file: File) => {
+    const isJpg = file.type === "image/jpeg" || file.type === "image/jpg";
+    if (!isJpg) {
+      message.error("You can only upload JPG files!");
+    }
+    return isJpg;
   };
 
   const fruits = [
@@ -36,8 +67,26 @@ const UploadImage = () => {
     "Strawberry",
   ];
 
+  const onClickPredict = async () => {
+    const resp = await predictPredictGet();
+    setPrediction(resp.prediction);
+    showModal();
+  };
+
+  useEffect(() => {}, [prediction]);
+
   return (
     <>
+      <Modal
+        title="Prediction"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="Yes it is!"
+        cancelText="No... :("
+      >
+        <p>Is your fruit a {prediction}?</p>
+      </Modal>
       <Title
         style={{ fontFamily: "Inter, sans-serif" }}
         className="upload-button-container"
@@ -65,9 +114,25 @@ const UploadImage = () => {
         </div>
       </div>
       <div className="upload-button-container">
-        <Upload {...props}>
-          <Button icon={<UploadOutlined />}>Upload Image</Button>
-        </Upload>
+        {!uploaded ? (
+          <Upload {...props}>
+            <Button icon={<UploadOutlined />}>Upload Image</Button>
+          </Upload>
+        ) : (
+          <>
+            <Button color="primary" onClick={onClickPredict}>
+              Predict!
+            </Button>
+            <Button
+              color="primary"
+              onClick={() => {
+                setUploaded(false);
+              }}
+            >
+              Upload new Image
+            </Button>
+          </>
+        )}
       </div>
     </>
   );

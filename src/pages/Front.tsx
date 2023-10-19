@@ -3,18 +3,14 @@ import { Link } from "react-router-dom";
 import { Typography } from "antd";
 
 const { Title, Paragraph } = Typography;
+import logo from "@assets/images/logo.png";
 
 export default function Front() {
-  const imageUrl = "../assets/images/logo.png";
+  const imageUrl = "/assets/images/logo.png";
 
   return (
     <div style={{ textAlign: "center", paddingTop: "100px" }}>
-      <Image
-        width={200}
-        src={imageUrl}
-        alt="Imagen de inicio"
-        preview={false}
-      />
+      <Image width={500} src={logo} alt="Imagen de inicio" />
       <Title style={{ fontFamily: "Inter, sans-serif" }}>
         Wellcome to What is that fruit
       </Title>
