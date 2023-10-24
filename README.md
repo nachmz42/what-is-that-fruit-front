@@ -23,7 +23,3 @@ This little personal project was created to put into practice the skills acquire
    This will start the development server, and you can access the application in your web browser.
 
 4. **Usage**: Upload an image of a fruit, and the CNN model will identify which fruit it is. Have fun guessing the fruits!
-
-```
-
-```
