@@ -1,27 +1,29 @@
-# React + TypeScript + Vite
+# What Is That Fruit?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description 🍏🍌🍊
 
-Currently, two official plugins are available:
+This little personal project was created to put into practice the skills acquired during the Le Wagon Data Science bootcamp. It's a simple web application where you can upload an image, and a Convolutional Neural Network (CNN) model, trained with Kaggle data, will detect which type of fruit it is. It's a fun way to test your fruit recognition skills!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Instructions 📝
 
-## Expanding the ESLint configuration
+1. **Installation**: To get started with this project, follow these steps:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+   ```bash
+   npm install
+   ```
 
-- Configure the top-level `parserOptions` property like this:
+2. **API Configuration**: You'll need to configure the API service. Make sure to replace the API URL in the `.env` file with the URL where you'll be running the API service. You can find the API service for this project [here](https://github.com/nachmz42/what-is-that-fruit-back).
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+3. **Run the Application**: Once the API is set up, you can run the React application using the following command:
+
+   ```bash
+   npm run dev
+   ```
+
+   This will start the development server, and you can access the application in your web browser.
+
+4. **Usage**: Upload an image of a fruit, and the CNN model will identify which fruit it is. Have fun guessing the fruits!
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+```
