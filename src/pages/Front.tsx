@@ -10,7 +10,9 @@ export default function Front() {
 
   return (
     <div style={{ textAlign: "center", paddingTop: "100px" }}>
-      <Image width={500} src={logo} alt="Imagen de inicio" />
+      <Image width={500} src={logo} alt="Image" preview={false} {
+
+      }/>
       <Title style={{ fontFamily: "Inter, sans-serif" }}>
         Wellcome to What is that fruit
       </Title>
